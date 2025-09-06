@@ -6,6 +6,19 @@ import Stats from "@/components/Stats";
 import { useState } from "react";
 import { modules } from "@/data/modules";
 
+function countMajors(selected: string[]) {
+    let majorCount = 0;
+    const majorModules = modules.filter((m) => m.type === "Major");
+    const minorModules = modules.filter((m) => m.type === "Minor");
+
+    // Count selected major modules
+    majorCount += majorModules.filter((m) => selected.includes(m.name)).length;
+    // Count pairs of selected minor modules
+    majorCount += Math.floor(minorModules.filter((m) => selected.includes(m.name)).length / 2);
+
+    return majorCount;
+}
+
 export default function Home() {
     const [selected, setSelected] = useState<string[]>([]);
 
@@ -13,9 +26,9 @@ export default function Home() {
         setSelected((prev) => (prev.includes(name) ? prev.filter((n) => n !== name) : [...prev, name]));
     };
 
-    const totalPoints = modules.filter((m) => selected.includes(m.name)).reduce((sum, m) => sum + m.points, 0);
+    const totalPoints = modules.filter((m) => selected.includes(m.name)).reduce((sum, m) => sum + m.percent, 0);
 
-    const majorCount = modules.filter((m) => selected.includes(m.name) && m.type === "Major").length;
+    const majorCount = countMajors(selected);
 
     const minorCount = modules.filter((m) => selected.includes(m.name) && m.type === "Minor").length;
 

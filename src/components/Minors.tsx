@@ -30,7 +30,7 @@ export default function Minors({ minors, selected, toggleModule }: MinorsProps) 
                                     <FaStarHalfAlt className="text-cyan-400" />
                                     {mod.name}
                                 </span>
-                                <span className="text-xs text-purple-200 font-semibold">{mod.points} pts</span>
+                                <span className="text-xs text-purple-200 font-semibold">{mod.percent} pts</span>
                             </div>
                         </motion.button>
                     );
