@@ -23,7 +23,7 @@ export default function Home() {
     const minors = modules.filter((m) => m.type === "Minor");
 
     return (
-        <div className="w-full flex flex-col p-6 gap-6 md:flex-row flex-1 gap-6">
+        <div className="flex flex-col p-6 gap-6 md:flex-row flex-1 gap-6 max-w-6xl mx-auto">
             <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Majors */}
                 <Majors majors={majors} selected={selected} toggleModule={toggleModule} />

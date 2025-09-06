@@ -38,6 +38,9 @@ interface MajorsProps {
 }
 
 function Majors({ majorCount }: MajorsProps) {
+    const progress = Math.min((majorCount / 16) * 100, 100);
+    const dotPosition = Math.min((7 / 16) * 100, 100);
+
     return (
         <div className="flex flex-col gap-2 p-4 rounded-2xl bg-blue-900/40 backdrop-blur-md shadow-lg border border-blue-500/40">
             <div className="flex items-center justify-between">
@@ -45,17 +48,34 @@ function Majors({ majorCount }: MajorsProps) {
                     <FaStar className="text-cyan-400" />
                     Majors
                 </span>
-                <span className={`text-2xl font-extrabold ${majorCount >= 7 ? "text-green-400" : "text-yellow-400"}`}>
-                    {majorCount} / 7
+                <span className={`text-2xl font-extrabold ${majorCount >= 7 ? "text-green-400" : "text-red-400"}`}>
+                    {majorCount} / 16
                 </span>
             </div>
-            <div className="w-full h-2 rounded-full bg-blue-800/30">
+            <div className="w-full h-2 rounded-full bg-blue-800/30 relative">
+                {/* Progress bar */}
                 <div
                     className={`h-2 rounded-full transition-all duration-500 ${
-                        majorCount >= 7 ? "bg-green-400" : "bg-yellow-400"
+                        majorCount >= 7 ? "bg-green-400" : "bg-red-400"
                     }`}
-                    style={{ width: `${Math.min((majorCount / 7) * 100, 100)}%` }}
+                    style={{ width: `${progress}%` }}
                 ></div>
+                {/* Dot at 7 majors */}
+                {majorCount < 7 && (
+                    <div
+                        className="absolute top-1/2 -translate-y-1/2"
+                        style={{
+                            left: `calc(${dotPosition}% - 4px)`, // Adjust for dot size
+                            width: "8px",
+                            height: "8px",
+                            borderRadius: "50%",
+                            background: "white",
+                            border: "2px solid #22c55e", // cyan-400
+                            boxShadow: "0 0 4px #22c55e",
+                            zIndex: 1,
+                        }}
+                    />
+                )}
             </div>
         </div>
     );
@@ -78,7 +98,7 @@ function Minors({ minorCount }: MinorsProps) {
             <div className="w-full h-2 rounded-full bg-pink-800/30">
                 <div
                     className="h-2 rounded-full bg-pink-400 transition-all duration-500"
-                    style={{ width: `${Math.min(minorCount * 10, 100)}%` }}
+                    style={{ width: `${Math.min((minorCount / 11) * 100, 100)}%` }}
                 ></div>
             </div>
         </div>
