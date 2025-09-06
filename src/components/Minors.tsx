@@ -1,4 +1,4 @@
-import { Module } from "@/app/page";
+import { Module } from "@/data/modules";
 import { motion } from "framer-motion";
 import { FaStarHalfAlt } from "react-icons/fa";
 
