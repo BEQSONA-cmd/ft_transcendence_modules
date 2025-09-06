@@ -11,11 +11,10 @@ function countMajors(selected: string[]) {
     const majorModules = modules.filter((m) => m.type === "Major");
     const minorModules = modules.filter((m) => m.type === "Minor");
 
-    // Count selected major modules
+    // Count selected major modules as 1
     majorCount += majorModules.filter((m) => selected.includes(m.name)).length;
-    // Count pairs of selected minor modules
-    majorCount += Math.floor(minorModules.filter((m) => selected.includes(m.name)).length / 2);
-
+    // Count each selected minor module as 0.5
+    majorCount += minorModules.filter((m) => selected.includes(m.name)).length * 0.5;
     return majorCount;
 }
 
@@ -26,7 +25,7 @@ export default function Home() {
         setSelected((prev) => (prev.includes(name) ? prev.filter((n) => n !== name) : [...prev, name]));
     };
 
-    const totalPoints = modules.filter((m) => selected.includes(m.name)).reduce((sum, m) => sum + m.percent, 0);
+    let totalPoints = modules.filter((m) => selected.includes(m.name)).reduce((sum, m) => sum + m.percent, 0);
 
     const majorCount = countMajors(selected);
 
@@ -34,6 +33,12 @@ export default function Home() {
 
     const majors = modules.filter((m) => m.type === "Major");
     const minors = modules.filter((m) => m.type === "Minor");
+
+    if (majorCount < 7) {
+        totalPoints = 0;
+    } else {
+        totalPoints += 30;
+    }
 
     return (
         <div className="flex flex-col p-6 gap-6 md:flex-row flex-1 gap-6 max-w-6xl mx-auto">

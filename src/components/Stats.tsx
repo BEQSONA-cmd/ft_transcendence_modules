@@ -6,27 +6,35 @@ interface TotalPointsProps {
 }
 
 function TotalPoints({ totalPoints, majorCount }: TotalPointsProps) {
+    let points: string;
+    let width: number;
+    let pointsText: string = "Points";
+    if (!totalPoints) {
+        points = `${majorCount.toFixed(1)} / 7.0`;
+        width = Math.min((majorCount / 7) * 100, 100);
+    } else {
+        pointsText = "Percentage";
+        points = `${totalPoints} %`;
+        width = Math.min((totalPoints / 125) * 100, 100);
+    }
+
     return (
         <div className="flex flex-col gap-2 p-4 rounded-2xl bg-purple-900/40 backdrop-blur-md shadow-lg border border-purple-500/40">
             <div className="flex items-center justify-between">
                 <span className="text-lg font-semibold text-purple-200 flex items-center gap-2">
                     <FaStar className="text-yellow-400" />
-                    Total Points
+                    {pointsText}
                 </span>
-                <span
-                    className={`text-2xl font-extrabold ${
-                        totalPoints < 100 || majorCount < 7 ? "text-red-400" : "text-green-400"
-                    }`}
-                >
-                    {totalPoints}
+                <span className={`text-2xl font-extrabold ${majorCount < 7 ? "text-red-400" : "text-green-400"}`}>
+                    {points}
                 </span>
             </div>
             <div className="w-full h-2 rounded-full bg-purple-800/30">
                 <div
                     className={`h-2 rounded-full transition-all duration-500 ${
-                        totalPoints < 100 || majorCount < 7 ? "bg-red-400" : "bg-green-400"
+                        majorCount < 7 ? "bg-red-400" : "bg-green-400"
                     }`}
-                    style={{ width: `${Math.min(totalPoints, 100)}%` }}
+                    style={{ width: `${width}%` }}
                 ></div>
             </div>
         </div>
@@ -38,8 +46,9 @@ interface MajorsProps {
 }
 
 function Majors({ majorCount }: MajorsProps) {
-    const progress = Math.min((majorCount / 16) * 100, 100);
-    const dotPosition = Math.min((7 / 16) * 100, 100);
+    let majorPoint = Math.floor(majorCount);
+    const progress = Math.min((majorPoint / 21) * 100, 100);
+    const dotPosition = Math.min((7 / 21) * 100, 100);
 
     return (
         <div className="flex flex-col gap-2 p-4 rounded-2xl bg-blue-900/40 backdrop-blur-md shadow-lg border border-blue-500/40">
@@ -49,7 +58,7 @@ function Majors({ majorCount }: MajorsProps) {
                     Majors
                 </span>
                 <span className={`text-2xl font-extrabold ${majorCount >= 7 ? "text-green-400" : "text-red-400"}`}>
-                    {majorCount} / 16
+                    {majorPoint}
                 </span>
             </div>
             <div className="w-full h-2 rounded-full bg-blue-800/30 relative">
