@@ -4,11 +4,12 @@ import { FaStarHalfAlt } from "react-icons/fa";
 
 interface MinorsProps {
     minors: Module[];
+    majorCount: number;
     selected: string[];
     toggleModule: (name: string) => void;
 }
 
-export default function Minors({ minors, selected, toggleModule }: MinorsProps) {
+export default function Minors({ minors, majorCount, selected, toggleModule }: MinorsProps) {
     return (
         <div>
             <h2 className="text-xl text-center font-bold mb-2 text-pink-300">Minor Modules</h2>
@@ -30,7 +31,13 @@ export default function Minors({ minors, selected, toggleModule }: MinorsProps) 
                                     <FaStarHalfAlt className="text-cyan-400" />
                                     {mod.name}
                                 </span>
-                                <span className="text-xs text-purple-200 font-semibold">{mod.percent} pts</span>
+                                {majorCount < 7 ? (
+                                    <span className="text-xs text-purple-200 font-semibold">{mod.point} pts</span>
+                                ) : (
+                                    <span className="text-xs text-purple-200 font-semibold">
+                                        {mod.percent.toFixed(2)} %
+                                    </span>
+                                )}
                             </div>
                         </motion.button>
                     );

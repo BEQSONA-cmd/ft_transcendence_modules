@@ -4,11 +4,12 @@ import { FaStar } from "react-icons/fa";
 
 interface MajorsProps {
     majors: Module[];
+    majorCount: number;
     selected: string[];
     toggleModule: (name: string) => void;
 }
 
-export default function Majors({ majors, selected, toggleModule }: MajorsProps) {
+export default function Majors({ majors, majorCount, selected, toggleModule }: MajorsProps) {
     return (
         <div>
             <h2 className="text-xl text-center font-bold mb-2 text-purple-300">Major Modules</h2>
@@ -30,7 +31,13 @@ export default function Majors({ majors, selected, toggleModule }: MajorsProps) 
                                     <FaStar className="text-blue-400" />
                                     {mod.name}
                                 </span>
-                                <span className="text-xs text-purple-200 font-semibold">{mod.percent} pts</span>
+                                {majorCount < 7 ? (
+                                    <span className="text-xs text-purple-200 font-semibold">{mod.point} pts</span>
+                                ) : (
+                                    <span className="text-xs text-purple-200 font-semibold">
+                                        {mod.percent.toFixed(2)} %
+                                    </span>
+                                )}
                             </div>
                         </motion.button>
                     );

@@ -44,10 +44,10 @@ export default function Home() {
         <div className="flex flex-col p-6 gap-6 md:flex-row flex-1 gap-6 max-w-6xl mx-auto">
             <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Majors */}
-                <Majors majors={majors} selected={selected} toggleModule={toggleModule} />
+                <Majors majors={majors} majorCount={majorCount} selected={selected} toggleModule={toggleModule} />
 
                 {/* Minors */}
-                <Minors minors={minors} selected={selected} toggleModule={toggleModule} />
+                <Minors minors={minors} majorCount={majorCount} selected={selected} toggleModule={toggleModule} />
             </div>
 
             {/* Stats */}
