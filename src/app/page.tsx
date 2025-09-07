@@ -5,6 +5,7 @@ import Minors from "@/components/Minors";
 import Stats from "@/components/Stats";
 import { useState } from "react";
 import { modules } from "@/data/modules";
+import { useLocalStorage } from "@/shared/useLocalStorage";
 
 function countMajors(selected: string[]) {
     let majorCount = 0;
@@ -19,10 +20,12 @@ function countMajors(selected: string[]) {
 }
 
 export default function Home() {
-    const [selected, setSelected] = useState<string[]>([]);
+    const [selected, setSelected] = useLocalStorage("selectedModules", []);
 
     const toggleModule = (name: string) => {
-        setSelected((prev) => (prev.includes(name) ? prev.filter((n) => n !== name) : [...prev, name]));
+        setSelected((prev: string[]) =>
+            prev.includes(name) ? prev.filter((n: string) => n !== name) : [...prev, name]
+        );
     };
 
     let totalPoints = modules.filter((m) => selected.includes(m.name)).reduce((sum, m) => sum + m.percent, 0);
