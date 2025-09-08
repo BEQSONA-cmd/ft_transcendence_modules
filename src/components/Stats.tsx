@@ -122,8 +122,8 @@ interface StatsProps {
 
 export default function Stats({ totalPoints, majorCount, minorCount }: StatsProps) {
     return (
-        <div className="w-64 flex flex-col gap-4">
-            <h2 className="text-2xl text-center font-bold mb-2 text-pink-400">Stats</h2>
+        <div className="w-64 flex flex-col gap-4 mb-6">
+            <h2 className="text-2xl text-center font-bold text-pink-400">Stats</h2>
 
             {/* Total Points Card */}
             <TotalPoints totalPoints={totalPoints} majorCount={majorCount} />

@@ -1,38 +1,41 @@
 "use client";
 
-import Majors from "@/components/Majors";
-import Minors from "@/components/Minors";
+import Majors from "@/components/stats/Majors";
+import Minors from "@/components/stats/Minors";
 import Stats from "@/components/Stats";
 import { useState } from "react";
 import { modules } from "@/data/modules";
 import { useLocalStorage } from "@/shared/useLocalStorage";
+import Actions from "@/components/actions/Actions";
 
-function countMajors(selected: string[]) {
+function countMajors(selected: number[]) {
     let majorCount = 0;
     const majorModules = modules.filter((m) => m.type === "Major");
     const minorModules = modules.filter((m) => m.type === "Minor");
 
     // Count selected major modules as 1
-    majorCount += majorModules.filter((m) => selected.includes(m.name)).length;
+    majorCount += majorModules.filter((m) => selected.includes(m.id)).length;
     // Count each selected minor module as 0.5
-    majorCount += minorModules.filter((m) => selected.includes(m.name)).length * 0.5;
+    majorCount += minorModules.filter((m) => selected.includes(m.id)).length * 0.5;
     return majorCount;
 }
 
 export default function Home() {
     const [selected, setSelected] = useLocalStorage("selectedModules", []);
 
-    const toggleModule = (name: string) => {
-        setSelected((prev: string[]) =>
-            prev.includes(name) ? prev.filter((n: string) => n !== name) : [...prev, name]
-        );
+    const toggleModule = (id: number) => {
+        if (selected.includes(id)) {
+            setSelected(selected.filter((modId: number) => modId !== id));
+        } else {
+            setSelected([...selected, id]);
+        }
     };
 
-    let totalPoints = modules.filter((m) => selected.includes(m.name)).reduce((sum, m) => sum + m.percent, 0);
+    let totalPoints = modules.filter((m) => selected.includes(m.id)).reduce((sum, m) => sum + m.percent, 0);
 
     const majorCount = countMajors(selected);
 
-    const minorCount = modules.filter((m) => selected.includes(m.name) && m.type === "Minor").length;
+    const minorCount = modules.filter((m) => selected.includes(m.id) && m.type === "Minor").length;
 
     const majors = modules.filter((m) => m.type === "Major");
     const minors = modules.filter((m) => m.type === "Minor");
@@ -54,7 +57,11 @@ export default function Home() {
             </div>
 
             {/* Stats */}
-            <Stats totalPoints={totalPoints} majorCount={majorCount} minorCount={minorCount} />
+            <div>
+                <Stats totalPoints={totalPoints} majorCount={majorCount} minorCount={minorCount} />
+
+                <Actions />
+            </div>
         </div>
     );
 }

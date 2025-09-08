@@ -1,34 +1,34 @@
 import { Module } from "@/data/modules";
 import { motion } from "framer-motion";
-import { FaStarHalfAlt } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 
-interface MinorsProps {
-    minors: Module[];
+interface MajorsProps {
+    majors: Module[];
     majorCount: number;
-    selected: string[];
-    toggleModule: (name: string) => void;
+    selected: number[];
+    toggleModule: (id: number) => void;
 }
 
-export default function Minors({ minors, majorCount, selected, toggleModule }: MinorsProps) {
+export default function Majors({ majors, majorCount, selected, toggleModule }: MajorsProps) {
     return (
         <div>
-            <h2 className="text-xl text-center font-bold mb-2 text-pink-300">Minor Modules</h2>
+            <h2 className="text-xl text-center font-bold mb-2 text-purple-300">Major Modules</h2>
             <div className="grid gap-2">
-                {minors.map((mod) => {
-                    const isSelected = selected.includes(mod.name);
+                {majors.map((mod) => {
+                    const isSelected = selected.includes(mod.id);
                     return (
                         <motion.button
                             whileHover={{ scale: 1.03 }}
                             whileTap={{ scale: 0.97 }}
                             key={mod.name}
-                            onClick={() => toggleModule(mod.name)}
+                            onClick={() => toggleModule(mod.id)}
                             className={`p-2 rounded-lg text-sm font-medium text-left transition-all shadow-md backdrop-blur-md border 
-                    bg-pink-800/40 border-pink-500/40
-                    ${isSelected ? "ring-2 ring-red-400" : "opacity-80 hover:opacity-100"}`}
+                                        bg-purple-800/40 border-purple-500/40
+                                        ${isSelected ? "ring-2 ring-blue-400" : "opacity-80 hover:opacity-100"}`}
                         >
                             <div className="flex items-center justify-between">
                                 <span className="font-bold text-base flex items-center gap-2">
-                                    <FaStarHalfAlt className="text-cyan-400" />
+                                    <FaStar className="text-blue-400" />
                                     {mod.name}
                                 </span>
                                 {majorCount < 7 ? (
