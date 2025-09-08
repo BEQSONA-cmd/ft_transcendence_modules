@@ -11,7 +11,7 @@ export const tasks: Task[] = [
         id: 1,
         type: "Major",
         title: "Use a framework to build the backend.",
-        description: "In this major module, you are required to use a specific web framework for backend development: Fastify with Node.js or Django with Python. This module focuses on building the server-side",
+        description: "In this major module, you are required to use a specific web framework for backend development: Fastify with Node.js.",
     },
     {
         id: 2,
