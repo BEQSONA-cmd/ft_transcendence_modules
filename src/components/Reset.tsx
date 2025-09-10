@@ -11,7 +11,7 @@ export function Reset() {
 
     return (
         <div
-            className="p-4 rounded-2xl bg-blue-900/40 backdrop-blur-md shadow-lg border border-blue-500/40 text-center cursor-pointer hover:bg-blue-900/60 transition"
+            className="z-10 p-4 rounded-2xl bg-blue-900/40 backdrop-blur-md shadow-lg border border-blue-500/40 text-center cursor-pointer hover:bg-blue-900/60 transition"
             onClick={handleReset}
         >
             <span className="text-xl font-semibold text-pink-200">Reset</span>

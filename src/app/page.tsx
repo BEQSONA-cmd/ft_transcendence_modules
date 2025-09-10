@@ -7,6 +7,7 @@ import { useState } from "react";
 import { modules } from "@/data/modules";
 import { useLocalStorage } from "@/shared/useLocalStorage";
 import Actions from "@/components/actions/Actions";
+import { BallField } from "@/components/ui/BallField";
 
 function countMajors(selected: number[]) {
     let majorCount = 0;
@@ -62,6 +63,7 @@ export default function Home() {
 
                 <Actions />
             </div>
+            <BallField />
         </div>
     );
 }

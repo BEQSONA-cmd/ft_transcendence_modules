@@ -15,18 +15,20 @@ interface AppProps {
 export default function App({ children }: AppProps) {
     return (
         <html lang={"en"}>
-            <body className="h-screen bg-gradient-to-br from-black via-purple-950 to-pink-950 text-white ">
-                {/* Header */}
-                <Header />
+            <body>
+                <div className="relative min-h-screen bg-gradient-to-br from-black via-purple-950 to-pink-950 text-white overflow-x-hidden">
+                    {/* Header */}
+                    <Header />
 
-                {/* Main Content */}
-                <main>{children}</main>
+                    {/* Main Content */}
+                    <main>{children}</main>
 
-                {/* Footer */}
-                <Footer />
+                    {/* Footer */}
+                    <Footer />
 
-                {/* Toast Notifications */}
-                <ToastContainer />
+                    {/* Toast Notifications */}
+                    <ToastContainer />
+                </div>
             </body>
         </html>
     );

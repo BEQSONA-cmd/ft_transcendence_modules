@@ -27,7 +27,7 @@ export function Download() {
 
     return (
         <div
-            className="p-4 rounded-2xl bg-pink-900/40 backdrop-blur-md shadow-lg border border-pink-500/40 text-center cursor-pointer hover:bg-pink-900/60 transition"
+            className="z-10 p-4 rounded-2xl bg-pink-900/40 backdrop-blur-md shadow-lg border border-pink-500/40 text-center cursor-pointer hover:bg-pink-900/60 transition"
             onClick={handleDownloadClick}
         >
             <span className="text-xl font-semibold text-pink-200">Download PDF</span>

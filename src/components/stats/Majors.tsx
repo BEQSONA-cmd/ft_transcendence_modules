@@ -22,7 +22,7 @@ export default function Majors({ majors, majorCount, selected, toggleModule }: M
                             whileTap={{ scale: 0.97 }}
                             key={mod.name}
                             onClick={() => toggleModule(mod.id)}
-                            className={`p-2 rounded-lg text-sm font-medium text-left transition-all shadow-md backdrop-blur-md border 
+                            className={`z-10 p-2 rounded-lg text-sm font-medium text-left transition-all shadow-md backdrop-blur-md border 
                                         bg-purple-800/40 border-purple-500/40
                                         ${isSelected ? "ring-2 ring-blue-400" : "opacity-80 hover:opacity-100"}`}
                         >
